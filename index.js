@@ -5,7 +5,7 @@ const router = require("./Router/product")
 
 
 //connect to mongo-database
-mongoose.connect("mongodb://localhost/Store")
+mongoose.connect("mongodb://localhost/Store",{userNewUrlParser:true})
     .then(console.log("connected to mongoDB..."))
     .catch(err => console.error(`Couldn't connect to MongoDB...${err}`))
 const app = express()
