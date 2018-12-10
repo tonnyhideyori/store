@@ -74,3 +74,7 @@ typings/
 
 # FuseBox cache
 .fusebox/
+
+config/custom-environment-variables.json
+config/dev.js
+config/default.json
