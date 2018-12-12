@@ -5,6 +5,7 @@ const {
     Product,
     validate
 } = require("../models/product")
+const authManager = require("../middleware/auth")
 const router = express.Router()
 
 router.get("/api/product", async (req, res) => {
@@ -22,7 +23,7 @@ router.get("/api/product/:id", async (req, res) => {
         res.status(404).send("the given item isn't found")
     }
 })
-router.post("/api/product", async (req, res) => {
+router.post("/api/product", authManager, async (req, res) => {
     const {
         error
     } = validate(req.body)
@@ -41,18 +42,18 @@ router.post("/api/product", async (req, res) => {
     res.send(product)
 
 })
-router.put("/api/product/:id", async (req, res) => {
+router.put("/api/product/:id", authManager, async (req, res) => {
     const {
         error
     } = validate(req.body)
     if (error) return res.status(400).send(error.details[0].message)
     try {
-        const product = await Product.findByIdAndUpdate(req.params.id, {
+        const product = await Product.findByIdAndUpdate(req.params.id, {$set:{
             name: req.body.name,
             category: req.body.category,
             quantity: req.body.quantity,
             price: req.body.price
-        }, {
+        }}, {
             new: true
         })
         res.send(product)
@@ -60,7 +61,7 @@ router.put("/api/product/:id", async (req, res) => {
         res.status(404).send("the given item isn't found")
     }
 })
-router.delete("/api/product/:id", async (req, res) => {
+router.delete("/api/product/:id", authManager, async (req, res) => {
     const product = await Product.findByIdAndRemove(req.params.id)
     if (!product) return res.status(404).send("the given item isn't found")
     res.send(product)

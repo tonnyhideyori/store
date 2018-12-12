@@ -8,7 +8,7 @@ transactions = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
-    article:Product,
+    article:[Product],
     seller:seller
 })
 const Transactions=mongoose.model("transactions",transacions)

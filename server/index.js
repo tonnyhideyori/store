@@ -4,6 +4,7 @@ const express = require("express")
 require("./models/product")
 const product = require("./Router/product")
 const manager=require("./Router/manager")
+const sell=require("./Router/sell")
 
 
 
@@ -19,6 +20,7 @@ app.use(express.urlencoded({
 app.use("/",product)
 app.use("/", manager)
 app.use("/",auth)
+app.use("/",sell)
 //require("./Router/product")(app)
 const port = 4500 || process.env.PORT
 app.listen(port, () => {
