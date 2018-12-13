@@ -32,7 +32,7 @@ app.use("/", manager)
 app.use("/",auth)
 app.use("/",sell)
 
-if(process.env.NODE_ENV==="production"){
+if (process.env.NODE_ENV === "production") {
     //express will serve up production assets like our main.js files
     app.use(express.static("client/build"));
 
