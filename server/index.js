@@ -4,14 +4,24 @@ const express = require("express")
 require("./models/product")
 const product = require("./Router/product")
 const manager=require("./Router/manager")
-const sell=require("./Router/sell")
+const sell=require
+("./Router/sell")
+const keys=require("./config/prod")
 
 
 
 //connect to mongo-database
-mongoose.connect("mongodb://localhost/Store",{userNewUrlParser:true})
-    .then(console.log("connected to mongoDB..."))
-    .catch(err => console.error(`Couldn't connect to MongoDB...${err}`))
+if(process.env.NODE==="production"){
+    mongoose.connect(keys.mongoURI)
+}
+else{
+    mongoose.connect("mongodb://localhost/Store", {
+            userNewUrlParser: true
+        })
+        .then(console.log("connected to mongoDB..."))
+        .catch(err => console.error(`Couldn't connect to MongoDB...${err}`))
+}
+
 const app = express()
 app.use(express.json())
 app.use(express.urlencoded({
