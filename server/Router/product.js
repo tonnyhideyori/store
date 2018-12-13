@@ -12,9 +12,9 @@ router.get("/api/product", async (req, res) => {
     const products = await Product.find().sort("name")
     res.send(products)
 })
-router.get("/", async (req, res) => {
+/*router.get("/", async (req, res) => {
     res.send("this is home") //i will use res.redirect("/")- for front end-react
-})
+})*/
 router.get("/api/product/:id", async (req, res) => {
     try {
         const product = await Product.findById(req.params.id)
