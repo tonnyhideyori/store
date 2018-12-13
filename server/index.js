@@ -43,5 +43,5 @@ if (process.env.NODE_ENV === "production") {
                 res.sendFile(path.join(__dirname, "client", "build", "index.html"));
     })
 }
-const port = 4500 || process.env.PORT
-app.listen(port,"0.0.0.0")
+const PORT = process.env.PORT || 4500
+app.listen(PORT,"0.0.0.0")
