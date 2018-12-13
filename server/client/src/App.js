@@ -9,7 +9,7 @@ class App extends Component {
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <p>
-            new web app for your inventory management coming soon...<br/>
+            new web app for your inventory management coming soon......<br/>
             it uses Nodejs(back-end) and react-redux app(front-end)
           </p>
           
