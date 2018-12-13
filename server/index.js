@@ -11,7 +11,7 @@ const keys=require("./config/prod")
 
 
 //connect to mongo-database
-if(process.env.NODE==="production"){
+if(process.env.NODE_ENV==="production"){
     mongoose.connect(keys.mongoURI)
 }
 else{
