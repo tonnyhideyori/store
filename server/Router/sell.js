@@ -1,11 +1,12 @@
 const express = require('express')
 const router = express.Router()
+const authSeller=require("../middleware/authseller")
 const Joi = require("joi")
 const {
     Product
 } = require("../models/product")
 
-router.post("/api/sell", async (req, res) => {
+router.post("/api/sell", authSeller, async (req, res) => {
     x=[]
     for (let i = 0; i < req.body.length; i++) {
         const {

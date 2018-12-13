@@ -39,16 +39,16 @@ router.post("/api/auth/seller", async (req, res) => {
     let seller = await Seller.findOne({
         email: req.body.email
     })
-    if (!manager) {
+    if (!seller) {
         res.status(400).send("invalid email or password")
         return
     }
-    const validPassword = await bcrypt.compare(req.body.email, seller.password)
+    const validPassword = await bcrypt.compare(req.body.password, seller.password)
     if (!validPassword) {
         res.status(400).send("invalid email or password")
     }
     const token = seller.generateAuthtoken()
-    res.send(token)
+    res.header("x-auth-token",token).send(token)
 })
 function validate(req) {
     const schema = {
