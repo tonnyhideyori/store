@@ -44,4 +44,4 @@ if (process.env.NODE_ENV === "production") {
     })
 }
 const port = 4500 || process.env.PORT
-app.listen(port)
+app.listen(port,"0.0.0.0")
