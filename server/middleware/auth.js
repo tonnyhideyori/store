@@ -10,6 +10,7 @@ function auth(req,res,next){
      const decodedmanager=jwt.verify(token,config.get("jwtPrivatekey"))
      /*const decodeseller=jwt.verify(token,config.get("jwtSellerPrivatekey"))*/
      req.manager=decodedmanager;
+     
      //req.seller=decodeseller;
      next()
      

@@ -7,7 +7,7 @@ const managerSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    email: String,
+    phone: Number,
     password: String,
     loginDate: {
         type: Date,
@@ -33,10 +33,9 @@ function validateManager(manager) {
             .min(5)
             .max(1000)
             .required(),
-        email: Joi.string()
+        phone: Joi.number()
             .min(5)
-            .max(255)
-            .email()
+            .max(10000000000)
             .required()
     }
     return Joi.validate(manager, schema)

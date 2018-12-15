@@ -4,6 +4,8 @@ const express = require("express")
 const bcrypt = require("bcrypt")
 const {Manager}=require("../models/manager")
 const {Seller}=require("../models/seller")
+const auth =require("../middleware/auth")
+const authSeller=require("../middleware/authseller")
 
 const router = express.Router()
 //auth for manager
@@ -14,10 +16,10 @@ router.post("/api/auth/manager",async(req,res)=>{
         return
     }
     let manager = await Manager.findOne({
-        email: req.body.email
+        phone: req.body.phone
     })
     if(!manager){
-        res.status(400).send("invalid email")
+        res.status(400).send("invalid phone")
         return
     }
     const validPassword= await bcrypt.compare(req.body.password,manager.password)
@@ -25,7 +27,7 @@ router.post("/api/auth/manager",async(req,res)=>{
         res.status(400).send("invalid password")
     }
      const token = manager.generateAuthtoken()
-     res.header("x-auth-token", token).send(token)
+     res.header("x-auth-token", token).send(manager.name)
 })
 //authentification of seller
 router.post("/api/auth/seller", async (req, res) => {
@@ -37,19 +39,27 @@ router.post("/api/auth/seller", async (req, res) => {
         return
     }
     let seller = await Seller.findOne({
-        email: req.body.email
+        phone: req.body.phone
     })
     if (!seller) {
-        res.status(400).send("invalid email or password")
+        res.status(400).send("invalid phone or password")
         return
     }
     const validPassword = await bcrypt.compare(req.body.password, seller.password)
     if (!validPassword) {
-        res.status(400).send("invalid email or password")
+        res.status(400).send("invalid phone or password")
     }
     const token = seller.generateAuthtoken()
-    res.header("x-auth-token",token).send(token)
+    res.header("x-auth-token",token).send(seller.name)
 })
+ router.get("/api/me_manager",auth,async(req,res)=>{
+    const manager= await Manager.findById(req.manager._id).select ("-password")  
+    res.send(manager) 
+ })
+ router.get("/api/me_seller",authSeller,async(req,res)=>{
+     const seller=await Seller.findById(req.seller._id).select("-password")
+     res.send(seller)
+ })
 function validate(req) {
     const schema = {
         password: Joi.string().required(),

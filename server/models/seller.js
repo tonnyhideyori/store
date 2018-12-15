@@ -11,8 +11,8 @@ const sellerSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    email: {
-        type: String,
+    phone: {
+        type: Number,
         required: true
     },
     password: {
@@ -43,7 +43,7 @@ function validateSeller(seller) {
             .required(),
         address:Joi.string().min(3).max(55).required(),
         password: Joi.string().min(3).max(1000).required(),
-        email: Joi.string().min(5).max(255).email().required()
+        phone: Joi.number().min(5).max(255).phone().required()
     }
     return Joi.validate(seller, schema)
 }

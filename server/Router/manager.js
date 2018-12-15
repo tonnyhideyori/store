@@ -20,18 +20,18 @@ router.post("/api/manager/registration", async (req, res) => {
         return
     }
     let manager = await Manager.findOne({
-        email: req.body.email
+        phone: req.body.phone
     })
     if (manager) {
-        res.status(400).send("Manager already registered")
+        res.status(404).send("Manager already registered")
         return
     }
-    manager = new Manager(_.pick(req.body, ["name", "email", "password"]))
+    manager = new Manager(_.pick(req.body, ["name", "phone", "password"]))
     const salt = await bcrypt.genSalt(10)
     manager.password = await bcrypt.hash(manager.password, salt)
     await manager.save()
     const token = manager.generateAuthtoken()
-    res.header("x-auth-token", token).send(_.pick(manager, ["_id", "name", "email"]))
+    res.header("x-auth-token", token).send({token:token,user:_.pick(manager, ["_id", "name", "phone"])})
 })
 router.post("/api/manager/addseller",auth, async (req, res) => {
     const { error } = validateSeller(req.body)
@@ -39,16 +39,16 @@ router.post("/api/manager/addseller",auth, async (req, res) => {
         res.status(404).send(error.details[0].message)
         return
     }
-    let seller = await Seller.findOne({email: req.body.email})
+    let seller = await Seller.findOne({phone: req.body.phone})
     if (seller) {
         res.status(400).send("Seller already registered")
         return
     }
-    seller = new Seller(_.pick(req.body, ["name", "email", "address", "password"]))
+    seller = new Seller(_.pick(req.body, ["name", "phone", "address", "password"]))
     const salt = await bcrypt.genSalt(10)
     seller.password = await bcrypt.hash(seller.password, salt)
     await seller.save()
-    res.send(_.pick(seller, ["_id", "name", "email"]))
+    res.send(_.pick(seller, ["_id", "name", "phone"]))
 })
 
 module.exports = router

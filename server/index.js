@@ -7,6 +7,7 @@ const manager=require("./Router/manager")
 const sell=require
 ("./Router/sell")
 const keys=require("./config/prod")
+const cors=require('cors')
 
 
 
@@ -27,6 +28,9 @@ app.use(express.json())
 app.use(express.urlencoded({
     extended: true
 }))
+////i have to clear tis line for final deployment
+app.use(cors())
+////
 app.use("/",product)
 app.use("/", manager)
 app.use("/",auth)
