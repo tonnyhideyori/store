@@ -9,5 +9,5 @@ export const fetchUser=()=>{
 }
 export const signup=(formProps)=>
    {return async function(dispatch){
-   await axios.post("http://localhost:4500/api/manager/registration", formProps)
+   await axios.post("/api/manager/registration", formProps)
  } }
