@@ -12,7 +12,7 @@ const router = express.Router()
 router.post("/api/auth/manager",async(req,res)=>{
     const {error}=validate(req.body)
     if(error){
-        res.status(404).send(error.deatils[0].message)
+        res.status(404).send(error.details[0].message)
         return
     }
     let manager = await Manager.findOne({
@@ -27,7 +27,7 @@ router.post("/api/auth/manager",async(req,res)=>{
         res.status(400).send("invalid password")
     }
      const token = manager.generateAuthtoken()
-     res.header("x-auth-token", token).send(manager.name)
+     res.header("x-auth-token", token).send({token:token,manager:manager.name})
 })
 //authentification of seller
 router.post("/api/auth/seller", async (req, res) => {
@@ -59,11 +59,13 @@ router.post("/api/auth/seller", async (req, res) => {
  router.get("/api/me_seller",authSeller,async(req,res)=>{
      const seller=await Seller.findById(req.seller._id).select("-password")
      res.send(seller)
+     
  })
 function validate(req) {
     const schema = {
+        name:Joi.string(),
         password: Joi.string().required(),
-        email: Joi.string().min(5).max(255).email().required()
+        phone: Joi.number().min(5).max(1000000000).required()
     }
     return Joi.validate(req, schema)
 }

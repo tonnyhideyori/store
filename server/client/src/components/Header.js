@@ -1,6 +1,43 @@
 import React,{Component} from "react"
+import {connect} from "react-redux"
+import {Link} from "react-router-dom"
 
 class Header extends Component{
+    renderLink(){
+       if (!this.props.authenticated) {
+           return (
+                <div className = "collapse navbar-collapse"
+                   id = "myNavbar" > 
+                   < ul className = "nav navbar-nav navbar-right" >
+                   <li> 
+                       < Link to="/signup"> < span className = "glyphicon glyphicon-shopping-cart" > </span> Create a shop 
+                       </Link>
+                    </li> 
+                   <li> 
+                       <Link to="/signin" > < span className = "glyphicon glyphicon-log-in" > </span > Login 
+                       </Link > 
+                    </li>   
+                   </ul>  
+                   </div>
+                   )
+       }else{
+           return(
+               <div className = "collapse navbar-collapse"
+                   id = "myNavbar" > 
+                   < ul className = "nav navbar-nav navbar-right" >
+                   <li> 
+                       < Link to="/"> < span className = "glyphicon glyphicon-shopping-cart" > </span> user 
+                       </Link>
+                    </li> 
+                   <li> 
+                       <Link to="/signout" > <span className = "glyphicon glyphicon-log-in" > </span > Logout 
+                       </Link> 
+                    </li>   
+                   </ul>  
+                   </div>
+           )
+       }
+    }
     render(){
         return(
             < nav className = "navbar navbar-inverse" >
@@ -15,20 +52,16 @@ class Header extends Component{
                     <span className = "icon-bar"/>
                     <span className = "icon-bar"/>
                     </button>
-                <a className = "navbar-brand"
-            href = "#" > Duka App </a> </div> <ul className = "nav navbar-nav" >
-                </ul> <div className="collapse navbar-collapse" id="myNavbar"><ul className = "nav navbar-nav navbar-right" >
-                < li > < a href = "#" > < span className = "glyphicon glyphicon-shopping-cart" > </span> Create a shop </a > </li> <li> <a  href = "#" > < span className = "glyphicon glyphicon-log-in" > </span > Login as Manager </a >
-                 </li> 
-                  < li > 
-                  < a href = "#" > 
-                  < span className = "glyphicon glyphicon-log-in" > </span> Login as seller</a >
-                      </li>
-                 </ul> </div>
+                <Link to="/home" className = "navbar-brand"
+             > Duka App </Link> </div> <ul className = "nav navbar-nav" >
+                </ul> 
+                {this.renderLink()}
                  </div> 
-                 </nav>
+             </nav>
         )
     }
 }
-
-export default Header
+function mapStateToProps(state){
+    return{authenticated:state.auth.authenticated}
+}
+export default connect(mapStateToProps)(Header)
