@@ -8,7 +8,7 @@ import {
   ADD_PRODUCT,
   ADD_PRODUCT_ERROR
 } from "./types"
-axios.defaults.baseURL="/api/*"
+axios.defaults.baseURL="https://dukashop.herokuapp.com"
 axios.defaults.headers.common['x']=localStorage.getItem("token")
 axios.defaults.headers.post["Content-Type"]="application/json"
 export const fetchUser = () => {
