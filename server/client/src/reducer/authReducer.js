@@ -3,7 +3,7 @@ import {
     AUTH_ERROR
 } from "../actions/types"
 const INITIAL_STATE = {
-    authenticated: "",
+    authenticated: {},
     errorMessage: ""
 }
 

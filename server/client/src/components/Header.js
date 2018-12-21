@@ -3,6 +3,7 @@ import {connect} from "react-redux"
 import {Link} from "react-router-dom"
 
 class Header extends Component{
+    
     renderLink(){
        if (!this.props.authenticated) {
            return (
@@ -26,11 +27,15 @@ class Header extends Component{
                    id = "myNavbar" > 
                    < ul className = "nav navbar-nav navbar-right" >
                    <li> 
-                       < Link to="/"> < span className = "glyphicon glyphicon-shopping-cart" > </span> user 
+                       < Link to="/cart"> < span className = "glyphicon glyphicon-shopping-cart" > </span> cart 
                        </Link>
                     </li> 
                    <li> 
-                       <Link to="/signout" > <span className = "glyphicon glyphicon-log-in" > </span > Logout 
+                       < Link to = "/" > <i className = "glyphicon glyphicon-user" > </i>  user
+                       </Link>
+                    </li> 
+                   <li> 
+                       < Link to = "/signout" > < i className = "glyphicon glyphicon-log-out" > </i> Logout
                        </Link> 
                     </li>   
                    </ul>  
@@ -62,6 +67,8 @@ class Header extends Component{
     }
 }
 function mapStateToProps(state){
-    return{authenticated:state.auth.authenticated}
+    return{
+        authenticated:state.auth
+    }
 }
 export default connect(mapStateToProps)(Header)

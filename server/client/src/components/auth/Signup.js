@@ -50,7 +50,7 @@ class Signup extends Component{
     }
 }
 function mapStateToProps(state){
-    return{errorMessage:state.auth.errorMessage}
+    return{errorMessage:state.auth}
 }
 export default compose(
     connect(mapStateToProps,actions),

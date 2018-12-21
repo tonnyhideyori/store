@@ -11,4 +11,5 @@ class Signout extends Component{
         return(<div>Bye! bye! </div>)
     }
 }
+
 export default connect(null,actions)(Signout)

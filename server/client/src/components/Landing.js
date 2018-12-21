@@ -3,7 +3,7 @@ import React,{Component} from "react"
 class  Landing extends Component{
     render(){
         return(
-            <div className="container">
+            <div>
         <div style={{textAlign:"center"}}>
             <div className="w3-card-4">
             <header className="w3-container w3-red">
@@ -16,11 +16,7 @@ class  Landing extends Component{
                 </p>
             </h5>
             </div>
-            <div>
-                <button>register new shop</button>
-                <button>login as manager</button>
-                <button>login as a seller</button>
-            </div>
+            
             </div>
         </div>
         </div>

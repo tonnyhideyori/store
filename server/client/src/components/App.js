@@ -8,10 +8,9 @@ import {BrowserRouter,Route} from "react-router-dom"
 import Signup from "./auth/Signup"
 import Signout from "./auth/Signout"
 import Signin from "./auth/Signin"
+import Addproduct from "../components/products/Addproduct"
 class App extends Component{
-  componentDidMount(){
-
-  }
+    
 render(){
     return (
         < div className = "container" >
@@ -23,6 +22,7 @@ render(){
              <Route exact path="/home" component={Home}/>
              <Route exact path="/signout" component={Signout}/>
              <Route exact path="/signin" component={Signin}/>
+             <Route exact path='/addproduct' component={Addproduct}/>
              </div>
          </BrowserRouter>
          </div>
@@ -30,4 +30,5 @@ render(){
     )  
 }
 }
+
 export default connect(null,actions)(App)

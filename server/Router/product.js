@@ -9,7 +9,7 @@ const authManager = require("../middleware/auth")
 const router = express.Router()
 
 router.get("/api/product", async (req, res) => {
-    const products = await Product.find().sort("name")
+    let products = await Product.find().sort("name")
     res.send(products)
 })
 /*router.get("/", async (req, res) => {
@@ -38,7 +38,8 @@ router.post("/api/product", authManager, async (req, res) => {
         quantity: req.body.quantity,
         price: req.body.price
     })
-    product = await product.save()
+    await product.save()
+    product = await Product.find().sort("name")
     res.send(product)
 
 })

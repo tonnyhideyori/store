@@ -1,5 +1,9 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, {
+  Component
+} from 'react';
+import {
+  connect
+} from 'react-redux';
 export default ChildComponent => {
   class ComposedComponent extends Component {
     // Our component just got rendered
@@ -16,12 +20,15 @@ export default ChildComponent => {
       }
     }
     render() {
-      return <ChildComponent {...this.props} />;
+      return <ChildComponent { ...this.props
+      }
+      />;
     }
   }
+
   function mapStateToProps(state) {
     return {
-        auth: state.auth.authenitcated
+      auth: state.auth.authenitcated
     };
   }
   return connect(mapStateToProps)(ComposedComponent);
