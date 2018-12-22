@@ -4,15 +4,16 @@ import {Link} from "react-router-dom"
 
 class Header extends Component{
     renderUser(){
-        if(this.props.authenticated.authenticated.user.name!==undefined){
+        console.log(this.props.authenticated.authenticated.user===null)
+        console.log(this.props.authenticated.authenticated.user)
+        if(this.props.authenticated.authenticated.user!==null){
             return this.props.authenticated.authenticated.user.name
-        }else{
-            return this.props.authenticated.authenticated.user
         }
+            return this.props.authenticated.authenticated.user
 
     }
     renderLink(){
-        console.log(this.props.authenticated.authenticated)
+        console.log(this.props.authenticated.authenticated===null)
        if (!this.props.authenticated.authenticated) {
            return (
                 <div className = "collapse navbar-collapse"
