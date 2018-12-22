@@ -5,7 +5,7 @@ import {Link} from "react-router-dom"
 class Header extends Component{
     
     renderLink(){
-        console.log(this.props.authenticated)
+        console.log(this.props.authenticated.authenticated)
        if (this.props.authenticated.authenticated===null) {
            return (
                 <div className = "collapse navbar-collapse"
@@ -32,7 +32,7 @@ class Header extends Component{
                        </Link>
                     </li> 
                    <li> 
-                       < Link to = "/" > <i className = "glyphicon glyphicon-user" > </i>  user
+                       < Link to = "/" > < i className = "glyphicon glyphicon-user" > </i>  {this.props.authenticated.authenticated.user? this.props.authenticated.authenticated.user.name:""}
                        </Link>
                     </li> 
                    <li> 

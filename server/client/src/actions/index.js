@@ -43,6 +43,8 @@ export const signup = (formProps, callback) => {
 }
 export const signout = ()=> {
   localStorage.removeItem('token')
+  localStorage.removeItem('user')
+  localStorage.removeItem('userID')
   return {
     type: AUTH_USER,
     payload: null
@@ -50,13 +52,15 @@ export const signout = ()=> {
 }
 export const signin = (formProps, callback) => async (dispatch) => {
   try {
-    const res = await axios.post("/api/auth/manager", formProps)
+    const res = await axios.post("/api/auth/manager", formProps);
     console.log(res.data)
     dispatch({
       type: AUTH_USER,
       payload: res.data
     })
     localStorage.setItem("token", res.data.token)
+    localStorage.setItem("user",res.data.user.name)
+    localStorage.setItem("userID",res.data.user.id)
     callback()
   } catch (e) {
     dispatch({
@@ -68,7 +72,7 @@ export const signin = (formProps, callback) => async (dispatch) => {
 }
 export const products = () => async dispatch => {
   try {
-    const res = await axios.get("/api/product")
+    const res = await axios.get("/api/product");
     dispatch({
       type: FETCH_PRODUCT,
       payload: res.data
@@ -82,7 +86,7 @@ export const products = () => async dispatch => {
 }
 export const addProduct = (formProps, callback) => async (dispatch) => {
   try {
-    const res = await axios.post("/api/product", formProps )
+    const res = await axios.post("/api/product", formProps);
     dispatch({
       type: FETCH_PRODUCT,
       payload: res.data
@@ -97,7 +101,7 @@ export const addProduct = (formProps, callback) => async (dispatch) => {
 }
 export const editProduct=(formProps,callback)=>async dispatch=>{
   try{
-     const res=await axios.put("/api/product/",formProps)
+    const res = await axios.put("/api/product/",formProps)
      dispatch({
        type:FETCH_PRODUCT,
        payload:res.data
