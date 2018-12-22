@@ -3,10 +3,17 @@ import {connect} from "react-redux"
 import {Link} from "react-router-dom"
 
 class Header extends Component{
-    
+    renderUser(){
+        if(this.props.authenticated.authenticated.user.name!==undefined){
+            return this.props.authenticated.authenticated.user.name
+        }else{
+            return this.props.authenticated.authenticated.user
+        }
+
+    }
     renderLink(){
         console.log(this.props.authenticated.authenticated)
-       if (this.props.authenticated.authenticated===null) {
+       if (!this.props.authenticated.authenticated) {
            return (
                 <div className = "collapse navbar-collapse"
                    id = "myNavbar" > 
@@ -32,7 +39,7 @@ class Header extends Component{
                        </Link>
                     </li> 
                    <li> 
-                       < Link to = "/" > < i className = "glyphicon glyphicon-user" > </i>  {this.props.authenticated.authenticated.user? this.props.authenticated.authenticated.user.name:""}
+                       < Link to = "/" > < i className = "glyphicon glyphicon-user" > </i>  {this.renderUser()}
                        </Link>
                     </li> 
                    <li> 
