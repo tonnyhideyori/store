@@ -30,7 +30,8 @@ export const signup = (formProps, callback) => {
         payload: response.data
       })
       localStorage.setItem("token", response.data.token)
-      localStorage.setItem("user",response.data.user)
+      localStorage.setItem("user", res.data.user.name)
+      localStorage.setItem("userID", res.data.user.id)
       callback()
       
     } catch (e) {
