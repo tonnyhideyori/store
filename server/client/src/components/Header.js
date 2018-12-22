@@ -5,7 +5,8 @@ import {Link} from "react-router-dom"
 class Header extends Component{
     
     renderLink(){
-       if (!this.props.authenticated) {
+        console.log(this.props.authenticated)
+       if (this.props.authenticated.authenticated===null) {
            return (
                 <div className = "collapse navbar-collapse"
                    id = "myNavbar" > 
@@ -45,7 +46,7 @@ class Header extends Component{
     }
     render(){
         return(
-            < nav className = "navbar navbar-inverse" >
+            < nav className = "navbar navbar-inverse">
                 <div className = "container-fluid" >
                 <div className = "navbar-header" >
                 < button
@@ -61,7 +62,8 @@ class Header extends Component{
              > Duka App </Link> </div> <ul className = "nav navbar-nav" >
                 </ul> 
                 {this.renderLink()}
-                 </div> 
+                                 
+            </div> 
              </nav>
         )
     }

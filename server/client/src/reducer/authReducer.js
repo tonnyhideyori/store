@@ -3,8 +3,8 @@ import {
     AUTH_ERROR
 } from "../actions/types"
 const INITIAL_STATE = {
-    authenticated: {},
-    errorMessage: ""
+    authenticated:null,
+    errorMessage: {}
 }
 
 
@@ -12,7 +12,8 @@ export default function (state = INITIAL_STATE, action) {
     switch (action.type) {
         case AUTH_USER:
             return { ...state,
-                authenitcated: action.payload
+                authenticated: action.payload
+
             }
         case AUTH_ERROR:
             return { ...state,

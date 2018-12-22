@@ -15,42 +15,57 @@ class Signup extends Component{
         return(
             <form onSubmit={handleSubmit(this.onSubmit)}>
                
-                <fieldset>
-                    <label>Your Name</label>
+                < fieldset className = "form-group" >
+                    <label>Shop Name</label>
                     <Field
                     name="name"
                     type="text"
                     component="input"
                     autoComplete="none"
+                    placeHolder="Write the name of the Shop"
+                    className="form-control"
+                    />
+                </fieldset>
+                < fieldset className = "form-group" >
+                    <label>Your Name</label>
+                    <Field
+                    name="user"
+                    type="text"
+                    component="input"
+                    autoComplete="none"
+                    placeholder="your Name"
+                    className="form-control"
                     />
                 </fieldset>
                 <fieldset>
-                    <label>Email</label>
+                    <label>Telephone</label>
                     <Field
                     name="phone"
-                    type="text"
+                    type="number"
                     component="input"
                     autoComplete= "none"
+                    className="form-control"
                     />
                 </fieldset>
 
-                <fieldset>
+                < fieldset className = "form-group" >
                     <label>Password</label>
                     <Field
                     name="password"
                     type="password"
                     component="input"
                     autoComplete = "none"
+                    className="form-control"
                     />
                 </fieldset>
                 <div>{this.props.errorMessage}</div>
-                <button>signUp</button>
+                <button className="btn btn-danger btn-lg">signUp</button>
             </form>
         )
     }
 }
 function mapStateToProps(state){
-    return{errorMessage:state.auth}
+    return{errorMessage:state.auth.errorMessage}
 }
 export default compose(
     connect(mapStateToProps,actions),

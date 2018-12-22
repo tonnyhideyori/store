@@ -1,5 +1,6 @@
 import React,{Component} from "react"
 import {connect} from 'react-redux'
+import {Redirect} from "react-router-dom"
 import * as actions from '../../actions'
 
 class Signout extends Component{
@@ -8,7 +9,8 @@ class Signout extends Component{
   }
 
     render(){
-        return(<div>Bye! bye! </div>)
+        return <Redirect to="/"/>
+
     }
 }
 

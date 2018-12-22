@@ -31,7 +31,7 @@ router.post("/api/manager/registration", async (req, res) => {
     manager.password = await bcrypt.hash(manager.password, salt)
     await manager.save()
     const token = manager.generateAuthtoken()
-    res.header("x-auth-token", token).send({token:token,user:_.pick(manager, ["_id", "name", "phone"])})
+    res.header("x-auth-token", token).send({token:token,user:_.pick(manager, ["_id", "name"])})
 })
 router.post("/api/manager/addseller",auth, async (req, res) => {
     const { error } = validateSeller(req.body)

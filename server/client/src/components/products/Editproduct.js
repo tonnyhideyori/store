@@ -5,9 +5,9 @@ import {compose} from "redux"
 import {connect} from "react-redux"
 import  requireAuth from "../requireAuth"
 
-class Addproduct extends Component{
+class Editproduct extends Component{
     onSubmit=(formProps)=>{
-        this.props.addProduct(formProps,()=>{
+        this.props.editProduct(formProps,()=>{
             this.props.history.push("/home")
         })
     }
@@ -22,7 +22,6 @@ class Addproduct extends Component{
                     type="text"
                     component="input"
                     autoComplete="none"
-                    placeHolder="write the name of the product"
                     className = "form-control"
                   />
                  </div>
@@ -55,9 +54,7 @@ class Addproduct extends Component{
                     autoComplete="none"
                     className="form-control"
                   />
-                  
                  </div>
-                 {this.props.errorMessage}
                  <button className="btn btn-primary">Add Product</button>
                  
             </form>
@@ -69,5 +66,5 @@ class Addproduct extends Component{
 
 export default compose(
     connect(null,actions),
-     reduxForm({form:"addProduct"})
-    ,requireAuth)(Addproduct)
+     reduxForm({form:"editProduct"})
+    ,requireAuth)(Editproduct)

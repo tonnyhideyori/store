@@ -10,6 +10,10 @@ const router = express.Router()
 
 router.get("/api/product", async (req, res) => {
     let products = await Product.find().sort("name")
+    if(!products){
+        res.status(404).send("No product yet in your Store. Please add product !")
+        return
+    }
     res.send(products)
 })
 /*router.get("/", async (req, res) => {
@@ -43,21 +47,24 @@ router.post("/api/product", authManager, async (req, res) => {
     res.send(product)
 
 })
-router.put("/api/product/:id", authManager, async (req, res) => {
+router.put("/api/product", authManager, async (req, res) => {
     const {
         error
     } = validate(req.body)
     if (error) return res.status(400).send(error.details[0].message)
     try {
-        const product = await Product.findByIdAndUpdate(req.params.id, {$set:{
-            name: req.body.name,
-            category: req.body.category,
-            quantity: req.body.quantity,
-            price: req.body.price
-        }}, {
+        await Product.findByIdAndUpdate(req.body.id, {
+            $set: {
+                name: req.body.name,
+                category: req.body.category,
+                quantity: req.body.quantity,
+                price: req.body.price
+            }
+        }, {
             new: true
         })
-        res.send(product)
+        const products = await Product.find().sort("name")
+        res.send(products)
     } catch (err) {
         res.status(404).send("the given item isn't found")
     }
@@ -65,7 +72,8 @@ router.put("/api/product/:id", authManager, async (req, res) => {
 router.delete("/api/product/:id", authManager, async (req, res) => {
     const product = await Product.findByIdAndRemove(req.params.id)
     if (!product) return res.status(404).send("the given item isn't found")
-    res.send(product)
+    const products = await Product.find().sort("name")
+    res.send(products)
 })
 
 module.exports = router

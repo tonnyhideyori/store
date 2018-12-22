@@ -28,31 +28,38 @@ class Signin extends Component {
                 handleSubmit(this.onSubmit)
             } >
 
-            <fieldset >
-            <label > Your Name </label> <Field 
+            < fieldset className = "form-group" >
+            <label > Shop Name </label> <Field 
             name = "name"
             type = "text"
             component = "input"
-            autoComplete = "none" />
+            autoComplete = "none" 
+            className = "form-control"
+            />
             </fieldset> 
-            <fieldset>
-            <label > Email </label> <Field 
+            < fieldset className = "form-group" >
+            <label > Telephone </label> 
+            <Field 
             name = "phone"
-            type = "text"
+            type = "number"
             component = "input"
-            autoComplete = "none" />
+            autoComplete = "none" 
+            className = "form-control"
+            />
             </fieldset>
 
-            <fieldset >
+            < fieldset className = "form-group" >
             <label > Password </label> 
             <Field 
             name = "password"
             type = "password"
             component = "input"
-            autoComplete = "none" />
+            autoComplete = "none" 
+            className = "form-control"
+            />
             </fieldset> <div> {
                 this.props.errorMessage
-            } </div> <button > signin </button> </form>
+            } </div> <button className="btn btn-danger btn-lg"> signin </button> </form>
         )
     }
 }

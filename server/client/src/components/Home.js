@@ -3,13 +3,13 @@ import requireAuth from "./requireAuth"
 import {compose} from "redux"
 import {connect} from "react-redux"
 import {products} from "../actions/index"
+import {Link} from "react-router-dom"
 class Home extends Component{
 componentDidMount() {
   this.props.products()
 }
 renderContent(){
-    var i=-1;
-     let u=(this.props.prod).map(product=>{
+     let product=(this.props.prod).map(product=>{
          return <div className="col-sm-4" key={product._id}>
             <div className="w3-card-4" style={{ marginRight: "2px", marginBottom: "10px" }} key={product._id}>
               <header className="w3-container w3-red">
@@ -24,23 +24,30 @@ renderContent(){
                   Price:<b>{product.price}</b>
                 </p>
               </div>
-              <footer className="w3-container">
-                < button className = "btn btn-primary"
+              <footer className="w3-container w3-orange w3-centered">
+                < button className = "w3-button w3-green w3-xlarge w3-left"
                 id = {product._id} >
-                  <b>sell</b>
+                  <b>Sell</b>
                 </button>
+                <Link to="/editproduct"> <button className = "w3-button w3-red w3-xlarge  w3-right"
+                id = {product._id} >
+                  <b>edit</b>
+                </button>
+                </Link>
                 <br />
               </footer>
             </div>
           </div>;
     }
     )
-    console.log(u)
-    return u
+    console.log(product)
+    return product
     
 }
    render(){
-       return <div className="row">{this.renderContent()}</div>
+       return <div className="row">{this.renderContent()}
+         <Link to="/addproduct"><button className="w3-button w3-circle w3-black w3-xxxlarge" style={{ position: "fixed", bottom: "5px", right:"1px"}}><b>+</b></button></Link>
+       </div>
        
    }
 }

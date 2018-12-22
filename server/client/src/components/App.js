@@ -9,6 +9,7 @@ import Signup from "./auth/Signup"
 import Signout from "./auth/Signout"
 import Signin from "./auth/Signin"
 import Addproduct from "../components/products/Addproduct"
+import Editproduct from "./products/Editproduct";
 class App extends Component{
     
 render(){
@@ -23,6 +24,7 @@ render(){
              <Route exact path="/signout" component={Signout}/>
              <Route exact path="/signin" component={Signin}/>
              <Route exact path='/addproduct' component={Addproduct}/>
+             <Route exact path="/editproduct" component={Editproduct}/>
              </div>
          </BrowserRouter>
          </div>

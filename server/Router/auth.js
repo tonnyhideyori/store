@@ -19,15 +19,15 @@ router.post("/api/auth/manager",async(req,res)=>{
         phone: req.body.phone
     })
     if(!manager){
-        res.status(400).send("invalid phone")
+        res.status(400).send("invalid phone or password")
         return
     }
     const validPassword= await bcrypt.compare(req.body.password,manager.password)
     if(!validPassword){
-        res.status(400).send("invalid password")
+        res.status(400).send("invalid phone or password")
     }
      const token = manager.generateAuthtoken()
-     res.header("x-auth-token", token).send({token:token,manager:manager.name})
+     res.header("x", token).send({token:token,user:{name:manager.name,id:manager._id}})
 })
 //authentification of seller
 router.post("/api/auth/seller", async (req, res) => {
@@ -50,7 +50,7 @@ router.post("/api/auth/seller", async (req, res) => {
         res.status(400).send("invalid phone or password")
     }
     const token = seller.generateAuthtoken()
-    res.header("x-auth-token",token).send(seller.name)
+    res.header("x",token).send(seller.name)
 })
  router.get("/api/me_manager",auth,async(req,res)=>{
     const manager= await Manager.findById(req.manager._id).select ("-password")  
@@ -60,6 +60,10 @@ router.post("/api/auth/seller", async (req, res) => {
      const seller=await Seller.findById(req.seller._id).select("-password")
      res.send(seller)
      
+ })
+ router.get("/api/logout",(req,res)=>{
+     req.logout()
+     res.redirect("http:localhost:3000")
  })
 function validate(req) {
     const schema = {
