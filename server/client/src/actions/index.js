@@ -114,3 +114,7 @@ export const editProduct=(formProps,callback)=>async dispatch=>{
      payload:e.response.data})
   }
 }
+export const user=()=>{
+  if(localStorage.getItem("user")===null){return ""}
+  localStorage.getItem("user")
+}

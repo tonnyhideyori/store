@@ -9,7 +9,7 @@ import reducers from "./reducer"
 import reduxThunk from 'redux-thunk'
 const store=createStore(reducers,{
     auth: {
-        authenticated: {auth:localStorage.getItem("token"),user:localStorage.getItem("user"),
+        authenticated: {auth:localStorage.getItem("token"),userName:localStorage.getItem("user"),
       userID:localStorage.getItem("userID")
     }
     }

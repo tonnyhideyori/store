@@ -4,12 +4,11 @@ import {Link} from "react-router-dom"
 
 class Header extends Component{
     renderUser(){
-        console.log(this.props.authenticated.authenticated.user===null)
-        console.log(this.props.authenticated.authenticated.user)
-        if(this.props.authenticated.authenticated.user!==null){
+        console.log(this.props.authenticated.authenticated.userName)
+        if(this.props.authenticated.authenticated.user!==undefined){
             return this.props.authenticated.authenticated.user.name
         }
-            return this.props.authenticated.authenticated.user
+            return this.props.authenticated.authenticated.userName
 
     }
     renderLink(){
