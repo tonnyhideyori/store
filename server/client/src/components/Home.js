@@ -29,8 +29,19 @@ renderContent(){
                 id = {product._id} >
                   <b>Sell</b>
                 </button>
-                <Link to="/editproduct"> <button className = "w3-button w3-red w3-xlarge  w3-right"
-                id = {product._id} >
+                < Link to = {
+                  {
+                    pathname: "/editproduct",
+                    state: {
+                      id: product._id,
+                      name: product.name,
+                      quantity: product.quantity,
+                      price: product.price,
+                      category: product.category
+                    }
+                  }
+                } > < button className = "w3-button w3-red w3-xlarge  w3-right"
+                 >
                   <b>edit</b>
                 </button>
                 </Link>

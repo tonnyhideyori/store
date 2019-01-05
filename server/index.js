@@ -6,6 +6,7 @@ const product = require("./Router/product")
 const manager=require("./Router/manager")
 const sell=require
 ("./Router/sell")
+const store=require("./Router/store")
 const keys=require("./config/prod")
 const cors=require('cors')
 
@@ -17,7 +18,7 @@ if(process.env.NODE_ENV==="production"){
 }
 else{
     mongoose.connect("mongodb://localhost/Store", {
-            userNewUrlParser: true
+            useNewUrlParser: true
         })
         .then(console.log("connected to mongoDB..."))
         .catch(err => console.error(`Couldn't connect to MongoDB...${err}`))
@@ -35,6 +36,7 @@ app.use("/",product)
 app.use("/", manager)
 app.use("/",auth)
 app.use("/",sell)
+app.use("/",store)
 
 if (process.env.NODE_ENV === "production") {
     //express will serve up production assets like our main.js files

@@ -26,7 +26,13 @@ router.post("/api/manager/registration", async (req, res) => {
         res.status(404).send("Manager already registered")
         return
     }
-    manager = new Manager(_.pick(req.body, ["name", "phone", "password"]))
+    manager = new Manager({
+        name:req.body.name,
+        password:req.body.password,
+        phone:req.body.phone,
+        store:req.body.id
+    }
+    )
     const salt = await bcrypt.genSalt(10)
     manager.password = await bcrypt.hash(manager.password, salt)
     await manager.save()

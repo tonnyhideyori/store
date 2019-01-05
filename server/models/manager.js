@@ -13,6 +13,10 @@ const managerSchema = new mongoose.Schema({
     loginDate: {
         type: Date,
         default: Date.now
+    },
+    store: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "stores"
     }
 
 })
@@ -26,6 +30,7 @@ const Manager = mongoose.model("Manager", managerSchema)
 //validating user input
 function validateManager(manager) {
     const schema = {
+        id:Joi.string().required(),
         name: Joi.string()
             .min(3)
             .required(),
