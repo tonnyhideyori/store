@@ -58,7 +58,8 @@ router.put("/api/product", authManager, async (req, res) => {
                 name: req.body.name,
                 category: req.body.category,
                 quantity: req.body.quantity,
-                price: req.body.price
+                price: req.body.price,
+                dateUpdated:Date.now()
             }
         }, {
             new: true

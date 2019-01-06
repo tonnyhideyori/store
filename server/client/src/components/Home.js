@@ -2,11 +2,12 @@ import React,{Component} from "react"
 import requireAuth from "./requireAuth"
 import {compose} from "redux"
 import {connect} from "react-redux"
-import {products} from "../actions/index"
+import * as actions  from "../actions/index"
 import {Link} from "react-router-dom"
 class Home extends Component{
 componentDidMount() {
   this.props.products()
+  this.props.edit()
 }
 renderContent(){
      let product=(this.props.prod).map(product=>{
@@ -51,7 +52,6 @@ renderContent(){
           </div>;
     }
     )
-    console.log(product)
     return product
     
 }
@@ -68,4 +68,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default compose(connect(mapStateToProps,{products}),requireAuth)(Home)
+export default compose(connect(mapStateToProps,actions),requireAuth)(Home)

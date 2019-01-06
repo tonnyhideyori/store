@@ -6,25 +6,17 @@ import {connect} from "react-redux"
 import  requireAuth from "../requireAuth"
 
 class Editproduct extends Component{
-   
+   componentDidMount() {
+       this.props.edit(this.props.location.state)
+   }
     onSubmit=(formProps)=>{
         this.props.editProduct(formProps,()=>{
             this.props.history.push("/home")
         })
     }
     
+    
     render(){
-        const editPro = this.props.location.state
-        console.log(editPro)
-
-         const data={
-            id:editPro.id,
-            name:editPro.name,
-            category:editPro.category,
-            price:editPro.price,
-            quantity:editPro.quantity
-         }
-         console.log(data)
         const {handleSubmit}=this.props
         return(
             <form onSubmit={handleSubmit(this.onSubmit)}>
@@ -68,19 +60,18 @@ class Editproduct extends Component{
                     className="form-control"
                   />
                  </div>
-                 <button className="btn btn-primary" >Add Product</button>
+                 <button className="btn btn-primary" >Edit Product</button>
                  
             </form>
         )
     }
 
 }
-function mapStateToProps(){
-
+function mapStateToProps(state){
+    return {initialValues:state.edit.data}
 }
 
-
 export default compose(
-    connect(null, actions),
+    connect(mapStateToProps, actions),
      reduxForm({form:"editProduct"})
     ,requireAuth)(Editproduct)

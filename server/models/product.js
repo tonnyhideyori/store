@@ -37,7 +37,8 @@ function validate(product) {
             .required(),
         quantity: Joi.number().required(),
         category: Joi.string(),
-        price: Joi.number().required()
+        price: Joi.number().required(),
+        id:Joi.string().required()
     }
     return Joi.validate(product, schema)
 }

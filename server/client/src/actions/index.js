@@ -119,3 +119,9 @@ export const user=()=>{
   localStorage.getItem("user")
 }
 
+export const edit=(data)=>dispatch=>{
+  dispatch({
+    type:EDIT_PRODUCT,
+    payload:data
+  })
+}
