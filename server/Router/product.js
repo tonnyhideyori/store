@@ -53,7 +53,7 @@ router.put("/api/product", authManager, async (req, res) => {
     } = validate(req.body)
     if (error) return res.status(400).send(error.details[0].message)
     try {
-        await Product.findByIdAndUpdate(req.body.id, {
+        product=await Product.findByIdAndUpdate(req.body.id, {
             $set: {
                 name: req.body.name,
                 category: req.body.category,
@@ -64,8 +64,8 @@ router.put("/api/product", authManager, async (req, res) => {
         }, {
             new: true
         })
-        const products = await Product.find().sort("name")
-        res.send(products)
+        
+        res.send(product)
     } catch (err) {
         res.status(404).send("the given item isn't found")
     }

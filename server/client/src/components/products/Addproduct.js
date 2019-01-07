@@ -4,6 +4,7 @@ import * as actions from "../../actions"
 import {compose} from "redux"
 import {connect} from "react-redux"
 import  requireAuth from "../requireAuth"
+import {Link} from "react-router-dom"
 
 class Addproduct extends Component{
     onSubmit=(formProps)=>{
@@ -31,6 +32,7 @@ class Addproduct extends Component{
                   <Field
                     name="category"
                     type="text"
+                    placeHolder="write the category of the product"
                     component="input"
                     autoComplete="none"
                     className = "form-control"
@@ -41,6 +43,7 @@ class Addproduct extends Component{
                   <Field
                     name="quantity"
                     type="number"
+                    placeHolder="write the quantity of the product"
                     component="input"
                     autoComplete="none"
                     className = "form-control"
@@ -52,22 +55,28 @@ class Addproduct extends Component{
                     name="price"
                     type="number"
                     component="input"
+                    placeHolder="write the price of the product"
                     autoComplete="none"
                     className="form-control"
                   />
-                  
+                  {this.props.add.prodAddError}
                  </div>
-                 {this.props.errorMessage}
-                 <button className="btn btn-primary">Add Product</button>
                  
+                 < button className = "w3-button w3-blue w3-xlarge  w3-left" > Add Product </button>
+                 <Link to="/home">
+                 <button
+                 className = "w3-button w3-red w3-xlarge  w3-right">Back</button>
+                 </Link>
             </form>
         )
     }
-
+ 
+}
+function mapStateToProps(state){
+return{add:state.add}
 }
 
-
 export default compose(
-    connect(null,actions),
+    connect(mapStateToProps,actions),
      reduxForm({form:"addProduct"})
     ,requireAuth)(Addproduct)

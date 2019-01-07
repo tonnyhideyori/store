@@ -36,9 +36,9 @@ function validate(product) {
             .min(3)
             .required(),
         quantity: Joi.number().required(),
-        category: Joi.string(),
+        category: Joi.string().required(),
         price: Joi.number().required(),
-        id:Joi.string().required()
+        id:Joi.string()
     }
     return Joi.validate(product, schema)
 }

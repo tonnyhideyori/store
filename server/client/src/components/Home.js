@@ -8,8 +8,11 @@ class Home extends Component{
 componentDidMount() {
   this.props.products()
   this.props.edit()
+
 }
+  
 renderContent(){
+  console.log(this.props.Cart)
      let product=(this.props.prod).map(product=>{
          return <div className="col-sm-4" key={product._id}>
             <div className="w3-card-4" style={{ marginRight: "2px", marginBottom: "10px" }} key={product._id}>
@@ -26,10 +29,12 @@ renderContent(){
                 </p>
               </div>
               <footer className="w3-container w3-orange w3-centered">
+              
                 < button className = "w3-button w3-green w3-xlarge w3-left"
-                id = {product._id} >
+                id = {product._id} onClick={e=>this.props.cart(product)}>
                   <b>Sell</b>
                 </button>
+                
                 < Link to = {
                   {
                     pathname: "/editproduct",
@@ -62,9 +67,12 @@ renderContent(){
        
    }
 }
+
+
 function mapStateToProps(state) {
     return {
-        prod:state.prod
+        prod:state.prod,
+        Cart:state.cart
     }
 }
 
