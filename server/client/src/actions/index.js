@@ -11,7 +11,6 @@ import {
   EDIT_PRODUCT_ERROR,
   CART
 } from "./types";
-
 axios.defaults.headers.common["x"] = localStorage.getItem("token");
 axios.defaults.headers.post["Content-Type"] = "application/json";
 export const fetchUser = () => {
@@ -141,9 +140,22 @@ export const edit = data => dispatch => {
     payload: data
   });
 };
-var item = new Array();
+var item = [];
 export const cart = data => dispatch => {
-  item.push(data);
+  let tocart = {
+    id: data._id,
+    name: data.name,
+    price: data.price,
+    quantity: 1
+  }
+  let filtered = item.filter(article => article.id === tocart.id)
+  if (filtered.length !== 0) {
+    let index = item.findIndex(ind => ind.id === tocart.id)
+    item[index].quantity += 1
+  } else {
+    item.push(tocart);
+  }
+
   dispatch({
     type: CART,
     payload: item
