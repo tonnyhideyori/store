@@ -5,7 +5,8 @@ import {Link} from "react-router-dom"
 
 class Cart extends Component{
 renderContent(){
-            let item=(this.props.CART).map(product=>{
+      if(this.props.CART===null){return;}
+            else{let item=(this.props.CART).map(product=>{
                 let total=product.price*product.quantity
                return <tr key={product._id}>
                     <td>{product.name}</td>
@@ -18,11 +19,15 @@ renderContent(){
             })
      
      return item  
+    }
    }
    renderGrandTotal(){
-       let total=(this.props.CART).map(item=>item.quantity*item.price).reduce((a,b)=>a+b,0)
+       if (this.props.CART === null) {
+           return <div style={{textAlign:"right"}}><h4><em><i>grand Total</i> <b>:</b> </em><strong className="w3-text-teal">0</strong></h4></div>;
+       }
+     else  {let total=(this.props.CART).map(item=>item.quantity*item.price).reduce((a,b)=>a+b,0)
        
-       return <div style={{textAlign:"right"}}><h4><em><i>grand Total</i> <b>:</b> </em><strong className="w3-text-teal">{total}</strong></h4></div>
+       return <div style={{textAlign:"right"}}><h4><em><i>grand Total</i> <b>:</b> </em><strong className="w3-text-teal">{total}</strong></h4></div>}
    }
 
     render(){

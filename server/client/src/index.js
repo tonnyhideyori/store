@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './css/index.css';
 import App from './components/App';
 import "./css/w3.css"
 import {Provider} from 'react-redux'
@@ -12,7 +11,8 @@ const store=createStore(reducers,{
         authenticated: {auth:localStorage.getItem("token"),userName:localStorage.getItem("user"),
       userID:localStorage.getItem("userID")
     }
-    }
+    },
+    cart:JSON.parse(localStorage.getItem("cart"))
 },applyMiddleware(reduxThunk))
 
 ReactDOM.render(

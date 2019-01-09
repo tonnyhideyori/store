@@ -148,6 +148,7 @@ export const cart = data => dispatch => {
     price: data.price,
     quantity: 1
   }
+  item=JSON.parse(localStorage.getItem("cart"))
   let filtered = item.filter(article => article.id === tocart.id)
   if (filtered.length !== 0) {
     let index = item.findIndex(ind => ind.id === tocart.id)
@@ -160,6 +161,7 @@ export const cart = data => dispatch => {
     type: CART,
     payload: item
   });
+  localStorage.setItem("cart",JSON.stringify(item))
 };
 export const empty = () => dispatch => {
   item = []
@@ -167,9 +169,9 @@ export const empty = () => dispatch => {
     type: CART,
     payload: item
   })
+  localStorage.removeItem("cart")
 }
 export const sell = (data, callback) =>  dispatch => {
-  
     item = []
     dispatch({
       type: CART,
@@ -177,4 +179,5 @@ export const sell = (data, callback) =>  dispatch => {
     })
     callback()
     axios.post("/api/sell", data)
+    localStorage.removeItem("cart")
 }
