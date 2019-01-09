@@ -1,13 +1,13 @@
 const express = require('express')
 const router = express.Router()
 const authSeller=require("../middleware/authseller")
+const authManager=require("../middleware/auth")
 const Joi = require("joi")
 const {
     Product
 } = require("../models/product")
-
-router.post("/api/sell", authSeller, async (req, res) => {
-    x=[]
+//here on auth i will put authseller manager is for testing i will remove it
+router.post("/api/sell", authManager, async (req, res) => {
     for (let i = 0; i < req.body.length; i++) {
         const {
             error
@@ -28,8 +28,6 @@ router.post("/api/sell", authSeller, async (req, res) => {
             new: true
         })
        product= await product.save()
-       x.push(product)
-        
     }
     res.send(x)
 })
@@ -39,7 +37,8 @@ function validate(product) {
         id: Joi.string().required(),
         name: Joi.string().required(),//i will remove this because we wont use this in the query
         quantity: Joi.number().required(),
-        idseller:Joi.string().required()
+        price:Joi.number().required()
+        //idseller:Joi.string().required()
     }
     return Joi.validate(product, schema)
 }

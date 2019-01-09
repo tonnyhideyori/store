@@ -161,3 +161,20 @@ export const cart = data => dispatch => {
     payload: item
   });
 };
+export const empty = () => dispatch => {
+  item = []
+  dispatch({
+    type: CART,
+    payload: item
+  })
+}
+export const sell = (data, callback) =>  dispatch => {
+  
+    item = []
+    dispatch({
+      type: CART,
+      payload: item
+    })
+    callback()
+    axios.post("/api/sell", data)
+}

@@ -1,10 +1,10 @@
 import React,{Component} from "react"
 import * as actions from "../../actions"
 import {connect} from "react-redux"
+import {Link} from "react-router-dom"
 
 class Cart extends Component{
-
-   renderContent(){
+renderContent(){
             let item=(this.props.CART).map(product=>{
                 let total=product.price*product.quantity
                return <tr key={product._id}>
@@ -27,8 +27,8 @@ class Cart extends Component{
 
     render(){
         console.log(this.props.CART)
-        return (<div>
-            <table className="w3-table-all">
+        return (<div className="w3-responsive">
+            <table className="w3-table-all w3-card-4">
                 <thead >
                 < tr className = "w3-pale-red" >
                     <th><b>Product</b></th>
@@ -41,7 +41,13 @@ class Cart extends Component{
                 
             </table>
             {this.renderGrandTotal()}
-        </div>)
+        <div className="w3-bar">
+                <Link to="/home"> <button className="w3-button w3-orange w3-round-large w3-margin">Back</button></Link>
+                <button className="w3-button w3-red w3-round-large w3-margin" onClick={e=>this.props.empty()}>Empty Cart</button>
+                <button className="w3-button w3-green w3-round-large w3-margin" onClick={e=>this.props.sell(this.props.CART,()=>{this.props.history.push("/home")})}>Sell</button>
+        </div>
+        </div>
+        )
     }
 
 }

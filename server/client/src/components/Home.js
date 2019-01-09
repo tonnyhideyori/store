@@ -8,11 +8,13 @@ class Home extends Component{
 componentDidMount() {
   this.props.products()
   this.props.edit()
-
+}
+componentWillUpdate() {
+  this.props.products()
 }
   
 renderContent(){
-  console.log(this.props.Cart)
+  //console.log(this.props.Cart)
      let product=(this.props.prod).map(product=>{
          return <div className="col-sm-4" key={product._id}>
             <div className="w3-card-4" style={{ marginRight: "2px", marginBottom: "10px" }} key={product._id}>
