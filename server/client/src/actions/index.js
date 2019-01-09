@@ -148,7 +148,10 @@ export const cart = data => dispatch => {
     price: data.price,
     quantity: 1
   }
-  item=JSON.parse(localStorage.getItem("cart"))
+  console.log(item.length)
+  if (JSON.parse(localStorage.getItem("cart"))!==null){
+    item=JSON.parse(localStorage.getItem("cart"))
+  }
   let filtered = item.filter(article => article.id === tocart.id)
   if (filtered.length !== 0) {
     let index = item.findIndex(ind => ind.id === tocart.id)
