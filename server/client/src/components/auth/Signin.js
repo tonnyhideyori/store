@@ -66,6 +66,7 @@ class Signin extends Component {
             className = "form-control"
             />
             </fieldset> <div> {
+                this.props.errorMessage
             } </div> <button className="btn btn-danger btn-lg"> signin </button> </form>
         )
     }
@@ -73,7 +74,7 @@ class Signin extends Component {
 
 function mapStateToProps(state) {
     return {
-        errorMessage: state.auth
+        errorMessage: state.auth.errorMessage
     }
 }
 export default compose(
