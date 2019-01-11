@@ -7,11 +7,8 @@ import {createStore,applyMiddleware} from "redux"
 import reducers from "./reducer"
 import reduxThunk from 'redux-thunk'
 const store=createStore(reducers,{
-    auth: {
-        authenticated: {auth:localStorage.getItem("token"),userName:localStorage.getItem("user"),
-      userID:localStorage.getItem("userID")
-    }
-    },
+    auth: JSON.parse(localStorage.getItem("full"))
+    ,
     cart:JSON.parse(localStorage.getItem("cart"))
 },applyMiddleware(reduxThunk))
 

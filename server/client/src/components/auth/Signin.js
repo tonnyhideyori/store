@@ -19,6 +19,14 @@ class Signin extends Component {
             this.props.history.push("/home")
         })
     }
+    renderError(){
+        if(this.props.errorMessage===null){
+            return
+        }
+        else{
+            return this.props.errorMessage.errorMessage
+        }
+    }
     render() {
         const {
             handleSubmit
@@ -58,7 +66,6 @@ class Signin extends Component {
             className = "form-control"
             />
             </fieldset> <div> {
-                this.props.errorMessage
             } </div> <button className="btn btn-danger btn-lg"> signin </button> </form>
         )
     }
@@ -66,7 +73,7 @@ class Signin extends Component {
 
 function mapStateToProps(state) {
     return {
-        errorMessage: state.auth.errorMessage
+        errorMessage: state.auth
     }
 }
 export default compose(

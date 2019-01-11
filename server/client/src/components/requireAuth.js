@@ -28,7 +28,7 @@ export default ChildComponent => {
 
   function mapStateToProps(state) {
     return {
-      auth: state.auth.authenticated
+      auth: state.auth
     };
   }
   return connect(mapStateToProps)(ComposedComponent);

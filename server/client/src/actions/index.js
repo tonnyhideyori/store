@@ -11,7 +11,9 @@ import {
   EDIT_PRODUCT_ERROR,
   CART
 } from "./types";
-axios.defaults.headers.common["x"] = localStorage.getItem("token");
+
+  axios.defaults.headers.common["x"] = localStorage.getItem("token")
+
 axios.defaults.headers.post["Content-Type"] = "application/json";
 export const fetchUser = () => {
   return async function (dispatch) {
@@ -34,9 +36,8 @@ export const signup = (formProps, callback) => {
         type: AUTH_USER,
         payload: response.data
       });
+      localStorage.setItem("full", JSON.stringify(response.data))
       localStorage.setItem("token", response.data.token);
-      localStorage.setItem("user", response.data.user.name);
-      localStorage.setItem("userID", response.data.user._id);
       callback();
     } catch (e) {
       dispatch({
@@ -47,9 +48,8 @@ export const signup = (formProps, callback) => {
   };
 };
 export const signout = () => {
-  localStorage.removeItem("token");
-  localStorage.removeItem("user");
-  localStorage.removeItem("userID");
+  localStorage.removeItem("full")
+  localStorage.removeItem("token")
   return {
     type: AUTH_USER,
     payload: null
@@ -61,14 +61,13 @@ export const signin = (formProps, callback) => async dispatch => {
       "/api/auth/manager",
       formProps
     );
-    console.log(res.data);
+    //console.log(res.data);
     dispatch({
       type: AUTH_USER,
       payload: res.data
     });
+    localStorage.setItem("full", JSON.stringify(res.data))
     localStorage.setItem("token", res.data.token);
-    localStorage.setItem("user", res.data.user.name);
-    localStorage.setItem("userID", res.data.user.id);
     callback();
   } catch (e) {
     dispatch({
@@ -149,8 +148,8 @@ export const cart = data => dispatch => {
     quantity: 1
   }
   console.log(item.length)
-  if (JSON.parse(localStorage.getItem("cart"))!==null){
-    item=JSON.parse(localStorage.getItem("cart"))
+  if (JSON.parse(localStorage.getItem("cart")) !== null) {
+    item = JSON.parse(localStorage.getItem("cart"))
   }
   let filtered = item.filter(article => article.id === tocart.id)
   if (filtered.length !== 0) {
@@ -164,7 +163,7 @@ export const cart = data => dispatch => {
     type: CART,
     payload: item
   });
-  localStorage.setItem("cart",JSON.stringify(item))
+  localStorage.setItem("cart", JSON.stringify(item))
 };
 export const empty = () => dispatch => {
   item = []
@@ -174,13 +173,13 @@ export const empty = () => dispatch => {
   })
   localStorage.removeItem("cart")
 }
-export const sell = (data, callback) =>  dispatch => {
-    item = []
-    dispatch({
-      type: CART,
-      payload: item
-    })
-    callback()
-    axios.post("/api/sell", data)
-    localStorage.removeItem("cart")
+export const sell = (data, callback) => dispatch => {
+  item = []
+  dispatch({
+    type: CART,
+    payload: item
+  })
+  callback()
+  axios.post("/api/sell", data)
+  localStorage.removeItem("cart")
 }

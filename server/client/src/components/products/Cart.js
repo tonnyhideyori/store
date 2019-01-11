@@ -2,7 +2,8 @@ import React,{Component} from "react"
 import * as actions from "../../actions"
 import {connect} from "react-redux"
 import {Link} from "react-router-dom"
-
+import {compose} from "redux"
+import requireAuth from "../requireAuth";
 class Cart extends Component{
 renderContent(){
       if(this.props.CART===null){return;}
@@ -31,7 +32,6 @@ renderContent(){
    }
 
     render(){
-        console.log(this.props.CART)
         return (<div className="w3-responsive">
             <table className="w3-table-all w3-card-4">
                 <thead >
@@ -49,7 +49,7 @@ renderContent(){
         <div className="w3-bar">
                 <Link to="/home"> <button className="w3-button w3-orange w3-round-large w3-margin">Back</button></Link>
                 <button className="w3-button w3-red w3-round-large w3-margin" onClick={e=>this.props.empty()}>Empty Cart</button>
-                <button className="w3-button w3-green w3-round-large w3-margin" onClick={e=>this.props.sell(this.props.CART,()=>{this.props.history.push("/home")})}>Sell</button>
+                <button className="w3-button w3-green w3-round-large w3-margin" onClick={e=>this.props.sell(this.props.CART,()=>{this.props.history.push("/home");})}>Sell</button>
         </div>
         </div>
         )
@@ -59,4 +59,4 @@ renderContent(){
 function mapStateToProps(state){
     return{CART:state.cart}
 }
-export default connect(mapStateToProps,actions) (Cart)
+export default compose(connect(mapStateToProps,actions),requireAuth) (Cart)
