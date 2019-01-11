@@ -29,7 +29,6 @@ router.post("/api/sell", authManager, async (req, res) => {
         })
        product= await product.save()
     }
-    res.send(x)
 })
 
 function validate(product) {
