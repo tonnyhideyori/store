@@ -19,14 +19,6 @@ class Signin extends Component {
             this.props.history.push("/home")
         })
     }
-    renderError(){
-        if(this.props.errorMessage===null){
-            return
-        }
-        else{
-            return this.props.errorMessage.errorMessage
-        }
-    }
     render() {
         const {
             handleSubmit
