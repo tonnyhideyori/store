@@ -180,6 +180,6 @@ export const sell = (data, callback) => dispatch => {
     payload: item
   })
   callback()
-  axios.post("/api/sell", data)
+  axios.post("/api/sell", data);
   localStorage.removeItem("cart")
 }

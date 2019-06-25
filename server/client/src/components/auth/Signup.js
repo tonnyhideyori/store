@@ -27,28 +27,6 @@ class Signup extends Component{
                     />
                 </fieldset>
                 < fieldset className = "form-group" >
-                    <label>Your Name</label>
-                    <Field
-                    name="user"
-                    type="text"
-                    component="input"
-                    autoComplete="none"
-                    placeholder="your Name"
-                    className="form-control"
-                    />
-                </fieldset>
-                <fieldset>
-                    <label>Telephone</label>
-                    <Field
-                    name="phone"
-                    type="number"
-                    component="input"
-                    autoComplete= "none"
-                    className="form-control"
-                    />
-                </fieldset>
-
-                < fieldset className = "form-group" >
                     <label>Password</label>
                     <Field
                     name="password"

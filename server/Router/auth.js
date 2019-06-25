@@ -2,7 +2,7 @@ const _ = require("lodash")
 const Joi = require("joi")
 const express = require("express")
 const bcrypt = require("bcrypt")
-const {Manager}=require("../models/manager")
+const {Manager,validateManager}=require("../models/manager")
 const {Seller}=require("../models/seller")
 const auth =require("../middleware/auth")
 const authSeller=require("../middleware/authseller")
@@ -10,13 +10,13 @@ const authSeller=require("../middleware/authseller")
 const router = express.Router()
 //auth for manager
 router.post("/api/auth/manager",async(req,res)=>{
-    const {error}=validate(req.body)
+    const {error}=validateManager(req.body)
     if(error){
         res.status(404).send(error.details[0].message)
         return
     }
     let manager = await Manager.findOne({
-        phone: req.body.phone
+        name: req.body.name
     })
     if(!manager){
         res.status(400).send("invalid phone or password")
@@ -39,7 +39,7 @@ router.post("/api/auth/seller", async (req, res) => {
         return
     }
     let seller = await Seller.findOne({
-        phone: req.body.phone
+        name: req.body.name
     })
     if (!seller) {
         res.status(400).send("invalid phone or password")

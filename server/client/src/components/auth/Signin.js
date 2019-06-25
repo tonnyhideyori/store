@@ -38,17 +38,6 @@ class Signin extends Component {
             />
             </fieldset> 
             < fieldset className = "form-group" >
-            <label > Telephone </label> 
-            <Field 
-            name = "phone"
-            type = "number"
-            component = "input"
-            autoComplete = "none" 
-            className = "form-control"
-            />
-            </fieldset>
-
-            < fieldset className = "form-group" >
             <label > Password </label> 
             <Field 
             name = "password"

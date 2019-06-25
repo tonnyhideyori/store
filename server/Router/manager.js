@@ -20,7 +20,7 @@ router.post("/api/manager/registration", async (req, res) => {
         return
     }
     let manager = await Manager.findOne({
-        phone: req.body.phone
+        name: req.body.name
     })
     if (manager) {
         res.status(404).send("Manager already registered")
@@ -29,8 +29,6 @@ router.post("/api/manager/registration", async (req, res) => {
     manager = new Manager({
         name:req.body.name,
         password:req.body.password,
-        phone:req.body.phone,
-        store:req.body.id
     }
     )
     const salt = await bcrypt.genSalt(10)
@@ -45,7 +43,7 @@ router.post("/api/manager/addseller",auth, async (req, res) => {
         res.status(404).send(error.details[0].message)
         return
     }
-    let seller = await Seller.findOne({phone: req.body.phone})
+    let seller = await Seller.findOne({name: req.body.name})
     if (seller) {
         res.status(400).send("Seller already registered")
         return
